@@ -84,8 +84,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-
-// fetched all products
 app.get("/products", async (req, res) => {
   const products = await Product.find();
 
@@ -96,7 +94,6 @@ app.get("/products", async (req, res) => {
   });
 });
 
-// add product
 app.post("/product", async (req, res) => {
   const { name, description, price, brand, image, category } = req.body;
 
@@ -124,6 +121,43 @@ app.post("/product", async (req, res) => {
     });
   }
 });
+
+app.get("/product/:id", async (req, res)=>{
+
+  const {id} = req.params;
+
+  const product = await Product.findById(id)
+
+  res.json({
+    success:true,
+    data: product,
+    message: "product fetched successfully..."
+  });
+});
+
+app.delete("/product/:id", async (req, res)=>{
+  const {id}= req.params;
+
+  await Product.deleteOne({_id: id});
+
+  res.json({
+    success:true,
+    message: "product deleted successfully..."
+  })
+});
+
+app.get('/aa-products',async (req, res)=>{
+
+  const {q} = req.query;
+
+  const products = await Product.find({ name: { $regex: q, $options:'i'}});
+
+  res.json({
+    success: true,
+    data: products,
+    message: "products fetched successfully"
+  })
+})
 
 const PORT = process.env.PORT || 5000;
 
