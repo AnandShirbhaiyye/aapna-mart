@@ -18,6 +18,7 @@ async function connectMongoDB() {
 }
 connectMongoDB();
 
+//health api
 app.get("/health", (req, res) => {
   res.json({
     success: true,
@@ -25,6 +26,7 @@ app.get("/health", (req, res) => {
   });
 });
 
+// sign up
 app.post("/signup", async (req, res) => {
   const { name, email, password, mobile, address, gender } = req.body;
 
@@ -53,6 +55,7 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+// login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -81,15 +84,46 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get('/products', async(req, res)=>{
+
+// fetched all products
+app.get("/products", async (req, res) => {
   const products = await Product.find();
 
   res.json({
     success: true,
     data: products,
-    message: "products fetched successfully..."
-  })
-})
+    message: "products fetched successfully...",
+  });
+});
+
+// add product
+app.post("/product", async (req, res) => {
+  const { name, description, price, brand, image, category } = req.body;
+
+  const product = new Product({
+    name: name,
+    description: description,
+    price: price,
+    brand: brand,
+    image: image,
+    category: category,
+  });
+
+  try {
+    const savedProduct = await product.save();
+
+    res.json({
+      success: true,
+      data: savedProduct,
+      message: "product added successfully",
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 
