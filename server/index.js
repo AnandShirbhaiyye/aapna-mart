@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import User from "./models/User.js";
+import Product from "./models/Product.js";
 
 const app = express();
 app.use(express.json());
@@ -79,6 +80,16 @@ app.post("/login", async (req, res) => {
     });
   }
 });
+
+app.get('/products', async(req, res)=>{
+  const products = await Product.find();
+
+  res.json({
+    success: true,
+    data: products,
+    message: "products fetched successfully..."
+  })
+})
 
 const PORT = process.env.PORT || 5000;
 
