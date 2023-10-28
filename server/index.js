@@ -122,42 +122,67 @@ app.post("/product", async (req, res) => {
   }
 });
 
-app.get("/product/:id", async (req, res)=>{
+app.get("/product/:id", async (req, res) => {
+  const { id } = req.params;
 
-  const {id} = req.params;
-
-  const product = await Product.findById(id)
+  const product = await Product.findById(id);
 
   res.json({
-    success:true,
+    success: true,
     data: product,
-    message: "product fetched successfully..."
+    message: "product fetched successfully...",
   });
 });
 
-app.delete("/product/:id", async (req, res)=>{
-  const {id}= req.params;
+app.delete("/product/:id", async (req, res) => {
+  const { id } = req.params;
 
-  await Product.deleteOne({_id: id});
+  await Product.deleteOne({ _id: id });
 
   res.json({
-    success:true,
-    message: "product deleted successfully..."
-  })
+    success: true,
+    message: "product deleted successfully...",
+  });
 });
 
-app.get('/aa-products',async (req, res)=>{
+app.get("/search-products", async (req, res) => {
+  const { q } = req.query;
 
-  const {q} = req.query;
-
-  const products = await Product.find({ name: { $regex: q, $options:'i'}});
+  const products = await Product.find({ name: { $regex: q, $options: "i" } });
 
   res.json({
     success: true,
     data: products,
-    message: "products fetched successfully"
-  })
-})
+    message: "products fetched successfully",
+  });
+});
+
+// PUT / products
+app.put("/products/:id", async (req, res) => {
+  const {id} = req.params;
+  const { name, description, price, image, category, brand } = req.body;
+
+  await Product.updateOne(
+    { _id: id },
+    {
+      $set: {
+        name,
+        description,
+        price,
+        image,
+        category,
+        brand,
+      },
+    }
+  );
+  const updatedProducts = await Product.findById(id);
+
+  res.json({
+    success: true,
+    data: updatedProducts,
+    message: "Product updated successfully",
+  });
+});
 
 const PORT = process.env.PORT || 5000;
 
