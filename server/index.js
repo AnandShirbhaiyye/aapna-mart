@@ -230,6 +230,16 @@ app.get("/order/:id", async (req, res) => {
   });
 });
 
+// get all orders
+app.get('/oreders' , async(req,res)=>{
+  const allOrders = await Order.find();
+  res.json({
+      success:"true",
+      data:allOrders,
+      message:"Orders fetch successfully..!"  
+    })
+})
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

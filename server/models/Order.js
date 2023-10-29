@@ -25,6 +25,8 @@ const orderSchema = new Schema({
         type: String,
         default: "pending"
     }
+},{
+    timestamps:true,
 });
 
 const Order = model('Order', orderSchema);
