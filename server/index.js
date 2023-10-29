@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 
 import User from "./models/User.js";
 import Product from "./models/Product.js";
+import Order from "./models/Order.js";
 
 const app = express();
 app.use(express.json());
@@ -159,7 +160,7 @@ app.get("/search-products", async (req, res) => {
 
 // PUT / products
 app.put("/products/:id", async (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const { name, description, price, image, category, brand } = req.body;
 
   await Product.updateOne(
@@ -182,6 +183,36 @@ app.put("/products/:id", async (req, res) => {
     data: updatedProducts,
     message: "Product updated successfully",
   });
+});
+
+//Post / order
+app.post("/order", async (req, res) => {
+  const { user, product, quantity, shippingAddress, deliveryCharges, status } =
+    req.body;
+
+  const order = new Order({
+    user: user,
+    product: product,
+    quantity: quantity,
+    shippingAddress: shippingAddress,
+    deliveryCharges:deliveryCharges,
+    status: status,
+  });
+
+  try {
+    const savedOrder = await order.save();
+
+    res.json({
+      success: true,
+      data: savedOrder,
+      message: "Order created successfully",
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      message: e.message,
+    });
+  }
 });
 
 const PORT = process.env.PORT || 5000;
