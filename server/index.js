@@ -195,7 +195,7 @@ app.post("/order", async (req, res) => {
     product: product,
     quantity: quantity,
     shippingAddress: shippingAddress,
-    deliveryCharges:deliveryCharges,
+    deliveryCharges: deliveryCharges,
     status: status,
   });
 
@@ -213,6 +213,21 @@ app.post("/order", async (req, res) => {
       message: e.message,
     });
   }
+});
+
+// get order by id
+app.get("/order/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const order = await Order.findOne({ _id: id }).populate("user product");
+
+  order.user.password = undefined;
+
+  res.json({
+    success: "true",
+    data: order,
+    message: "Order fetched succesfully..!",
+  });
 });
 
 const PORT = process.env.PORT || 5000;
