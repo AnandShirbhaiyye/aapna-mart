@@ -117,7 +117,7 @@ function SignUp() {
                       onChange={(e) => setAddress(e.target.value)}
                     />
                   </div>
-                  <div className="d-flex justify-content-evenly">
+                  <div className="d-flex justify-content-around">
                   <div>
                     <input
                       type="radio"
@@ -149,7 +149,7 @@ function SignUp() {
 
                   <button
                     type="button"
-                    className="btn btn-primary w-100 mt-3"
+                    className="btn btn-dark w-100 mt-3"
                     onClick={signupUser}
                   >
                     <b>Signup</b>
@@ -160,7 +160,7 @@ function SignUp() {
             <div className="col-md-6 mt-3 ">
               <img
                 src={SignupImg}
-                alt=""
+                alt="signup-img"
                 className="signup-restro-img mx-auto d-block"
               />
             </div>

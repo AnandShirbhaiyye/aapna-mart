@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
+import LoginImg from "./loginImg.png";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -13,13 +14,13 @@ function Login() {
           <div className="row">
             <h2 className="text-center mt-3">Login</h2>
             <div className="col-md-6">
-              {/* <img
+              <img
                 src={LoginImg}
-                alt=""
+                alt="login-img"
                 className="login-img mx-auto d-block"
-              /> */}
+              />
             </div>
-            <div className="col-md-6 mt-3 ">
+            <div className="col-md-6 mt-5">
               <div className="mt-5 ">
                 <form>
                   <div className="mb-3">
@@ -44,7 +45,7 @@ function Login() {
                   </div>
                   <button
                     type="button"
-                    className="btn btn-primary w-100 mt-3"
+                    className="btn btn-dark w-100 mt-3"
                     onClick={LoginUser}
                   >
                     <b>Login</b>

@@ -18,3 +18,7 @@
     font-size: 32px;
     font-family: Arial, Helvetica, sans-serif;
 }
+.radio-input{
+    border: 1 px solid gray;
+    padding: 5px;
+}
