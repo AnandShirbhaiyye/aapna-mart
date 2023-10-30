@@ -230,30 +230,46 @@ app.get("/order/:id", async (req, res) => {
 });
 
 // get all orders by user
-app.get('/order/user/:id', async (req, res) => {
-  const { id } = req.params
-  const orders = await Order.find({user: id}).populate('user  product');
+app.get("/order/user/:id", async (req, res) => {
+  const { id } = req.params;
+  const orders = await Order.find({ user: id }).populate("user  product");
 
-  orders.forEach((Order)=>{
-      Order.user.password = undefined
-  })
+  orders.forEach((Order) => {
+    Order.user.password = undefined;
+  });
   res.json({
-      success:"true",
-      data:orders,
-      message:" Orders fetch successfully..!"  
-    })
-})
-
-// get all orders
-app.get('/oreders' , async(req,res)=>{
-  const allOrders = await Order.find();
-  res.json({
-      success:"true",
-      data:allOrders,
-      message:"Orders fetch successfully..!"  
-    })
+    success: "true",
+    data: orders,
+    message: " Orders fetch successfully..!",
+  });
 });
 
+// get all orders
+app.get("/oreders", async (req, res) => {
+  const allOrders = await Order.find();
+  res.json({
+    success: "true",
+    data: allOrders,
+    message: "Orders fetch successfully..!",
+  });
+});
+
+//update status
+app.patch("/order/status/:id", async (req, res) => {
+  const { status } = req.body;
+  
+  const { id } = req.params;
+
+  await Order.updateOne({ _id: id }, { $set: { status: status }});
+
+  const updatedStatus = await Order.findOne({ _id: id });
+
+  res.json({
+    success: "true",
+    data: updatedStatus,
+    message: "order status updated successfully..!",
+  });
+});
 
 const PORT = process.env.PORT || 5000;
 
