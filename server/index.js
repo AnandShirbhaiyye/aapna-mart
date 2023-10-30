@@ -158,7 +158,7 @@ app.get("/search-products", async (req, res) => {
 });
 
 // PUT / products
-app.put("/products/:id", async (req, res) => {
+app.put("/product/:id", async (req, res) => {
   const { id } = req.params;
   const { name, description, price, image, category, brand } = req.body;
 
@@ -257,10 +257,10 @@ app.get("/oreders", async (req, res) => {
 //update status
 app.patch("/order/status/:id", async (req, res) => {
   const { status } = req.body;
-  
+
   const { id } = req.params;
 
-  await Order.updateOne({ _id: id }, { $set: { status: status }});
+  await Order.updateOne({ _id: id }, { $set: { status: status } });
 
   const updatedStatus = await Order.findOne({ _id: id });
 

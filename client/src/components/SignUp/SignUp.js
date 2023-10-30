@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./SignUp.css";
 import axios from "axios";
 import showToast from 'crunchy-toast';
+import SignupImg from './signup.png'
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -42,12 +43,11 @@ function SignUp() {
     });
     console.log(response.data);
     if (response.data.success) {
-    //   alert(response.data.message);
       showToast(response.data.message, 'success', 3000);
       window.location.href = "/login";
     } else {
-    //   alert(response.data.message);
     showToast(response.data.message, 'alert', 3000);
+
       setName("");
       setEmail("");
       setMobile("");
@@ -60,9 +60,9 @@ function SignUp() {
       <div className="container">
         <div className="signup">
           <div className="row">
-            <h4 className="text-center signup-quote">
+            {/* <h4 className="text-center signup-quote">
               <u>“Make a customer, not a sale.🤩”</u>
-            </h4>
+            </h4> */}
             <h2 className="text-center mt-3">Aapna Mart🥋🍸</h2>
             <div className="col-md-6">
               <div className="mt-5 ">
@@ -158,11 +158,11 @@ function SignUp() {
               </div>
             </div>
             <div className="col-md-6 mt-3 ">
-              {/* <img
-                src={SignupImg
+              <img
+                src={SignupImg}
                 alt=""
                 className="signup-restro-img mx-auto d-block"
-              /> */}
+              />
             </div>
           </div>
         </div>
