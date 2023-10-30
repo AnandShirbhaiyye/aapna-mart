@@ -1,7 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
 import User from "./models/User.js";
 import Product from "./models/Product.js";
 import Order from "./models/Order.js";
@@ -185,7 +184,7 @@ app.put("/products/:id", async (req, res) => {
   });
 });
 
-//Post / order
+//post / order
 app.post("/order", async (req, res) => {
   const { user, product, quantity, shippingAddress, deliveryCharges, status } =
     req.body;
@@ -230,6 +229,21 @@ app.get("/order/:id", async (req, res) => {
   });
 });
 
+// get all orders by user
+app.get('/order/user/:id', async (req, res) => {
+  const { id } = req.params
+  const orders = await Order.find({user: id}).populate('user  product');
+
+  orders.forEach((Order)=>{
+      Order.user.password = undefined
+  })
+  res.json({
+      success:"true",
+      data:orders,
+      message:" Orders fetch successfully..!"  
+    })
+})
+
 // get all orders
 app.get('/oreders' , async(req,res)=>{
   const allOrders = await Order.find();
@@ -238,7 +252,8 @@ app.get('/oreders' , async(req,res)=>{
       data:allOrders,
       message:"Orders fetch successfully..!"  
     })
-})
+});
+
 
 const PORT = process.env.PORT || 5000;
 
