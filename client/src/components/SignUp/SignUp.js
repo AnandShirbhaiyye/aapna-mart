@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./SignUp.css";
 import axios from "axios";
+import showToast from 'crunchy-toast';
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -8,9 +9,29 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [mobile, setMobile] = useState("");
   const [address, setAddress] = useState("");
-  const [gender, setGender] = useState("male");
+  const [gender, setGender] = useState("female");
 
   async function signupUser() {
+    if(!name){
+        showToast('name is required', 'alert', 4000);
+        return;
+    }
+    if(!email){
+        showToast('email is required', 'alert', 4000);
+        return;
+    }
+    if(!password){
+        showToast('password is required', 'alert', 4000);
+        return;
+    }
+    if(!mobile){
+        showToast('mobile number is required', 'alert', 4000);
+        return;
+    }
+    if(!address){
+        showToast('address is required', 'alert', 4000);
+        return;
+    }
     const response = await axios.post("/signup", {
       name: name,
       email: email,
@@ -21,10 +42,12 @@ function SignUp() {
     });
     console.log(response.data);
     if (response.data.success) {
-      alert(response.data.message);
+    //   alert(response.data.message);
+      showToast(response.data.message, 'success', 3000);
       window.location.href = "/login";
     } else {
-      alert(response.data.message);
+    //   alert(response.data.message);
+    showToast(response.data.message, 'alert', 3000);
       setName("");
       setEmail("");
       setMobile("");
@@ -59,7 +82,7 @@ function SignUp() {
                       type="email"
                       className="form-control"
                       id="email"
-                      placeholder="enter yoyr email"
+                      placeholder="enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -117,7 +140,7 @@ function SignUp() {
                       className="gender"
                       checked={gender === "female"}
                       onClick={() => {
-                        setGender("male");
+                        setGender("female");
                       }}
                     />
                     <label htmlFor="female">Female</label>
