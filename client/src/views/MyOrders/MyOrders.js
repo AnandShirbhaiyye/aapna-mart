@@ -1,7 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import './MyOrders.css';
 import Navbar from '../../components/Navbar/Navbar';
 
 function MyOrders() {
+
+    const [user, setUser] = useState({});
+
+    
 
   return (
    <>
