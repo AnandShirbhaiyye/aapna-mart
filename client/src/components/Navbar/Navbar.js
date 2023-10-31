@@ -12,7 +12,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="navbar">
+      <div className="navbar shadow p-3 mb-5 bg-body rounded">
         <Link to="/" className="navbar-brand">
           Aapna-Mart🛍️
         </Link>
@@ -34,7 +34,7 @@ function Navbar() {
         <div>
           Hello, {user.name || "user"}
           {user?.name ? (
-            <button
+            <span
               className="navbar-logout btn btn-outline-secondary btn-sm"
               onClick={() => {
                 localStorage.removeItem("user");
@@ -42,7 +42,7 @@ function Navbar() {
               }}
             >
               Logout
-            </button>
+            </span>
           ) : null}
         </div>
       </div>

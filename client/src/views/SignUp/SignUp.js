@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SignUp.css";
 import axios from "axios";
 import showToast from 'crunchy-toast';
@@ -57,6 +57,16 @@ function SignUp() {
       setAddress("");
     }
   }
+
+  useEffect(() => {
+    const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
+    console.log(storageUser);
+
+    if (storageUser?.email) {
+      alert("You are already logged in!");
+      window.location.href = "/";
+    }
+  }, []);
   return (
     <>
     <Navbar/>
