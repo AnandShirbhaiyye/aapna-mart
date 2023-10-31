@@ -5,9 +5,7 @@ import Navbar from '../../components/Navbar/Navbar';
 function MyOrders() {
 
     const [user, setUser] = useState({});
-
     
-
   return (
    <>
    <Navbar/>

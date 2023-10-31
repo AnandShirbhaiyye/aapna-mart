@@ -4,6 +4,7 @@ import showToast from 'crunchy-toast';
 import LoginImg from "./loginImg.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../../components/Navbar/Navbar";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -23,6 +24,7 @@ function Login() {
   }
   return (
     <>
+    <Navbar/>
       <div className="container">
         <div className="login">
           <div className="row">

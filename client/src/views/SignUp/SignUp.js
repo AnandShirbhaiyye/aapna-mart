@@ -4,6 +4,7 @@ import axios from "axios";
 import showToast from 'crunchy-toast';
 import SignupImg from './signup.png';
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -58,6 +59,7 @@ function SignUp() {
   }
   return (
     <>
+    <Navbar/>
       <div className="container">
         <div className="signup">
           <div className="row">
