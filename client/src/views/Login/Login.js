@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 import "./Login.css";
+import showToast from 'crunchy-toast';
 import LoginImg from "./loginImg.png";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function LoginUser() {}
+  async function LoginUser() {
+    const response = await axios.post("/login", {
+      email: email,
+      password:password
+    })
+    showToast(response?.data?.message, 'success', 3000);
+
+    if(response?.data?.success){
+    localStorage.setItem("user", JSON.stringify(response?.data?.data));
+    window.location.href = '/';
+    }
+  }
   return (
     <>
       <div className="container">
@@ -50,6 +64,11 @@ function Login() {
                   >
                     <b>Login</b>
                   </button>
+                 <div className="mt-3 text-center">
+                 <Link to="/signup" className="signup-link">
+                    Create new Account, Sign Up
+                  </Link>
+                 </div>
                 </form>
               </div>
             </div>

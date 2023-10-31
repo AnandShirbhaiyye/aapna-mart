@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./SignUp.css";
 import axios from "axios";
 import showToast from 'crunchy-toast';
-import SignupImg from './signup.png'
+import SignupImg from './signup.png';
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -154,6 +155,11 @@ function SignUp() {
                   >
                     <b>Signup</b>
                   </button>
+                  <div className="mt-3 text-center">
+                 <Link to="/login" className="signup-link">
+                   Already have an Account, login
+                  </Link>
+                 </div>
                 </form>
               </div>
             </div>
