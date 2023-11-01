@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import axios from "axios";
+import './Home.css'
+import ProductsCards from "../../components/ProductsCards/ProductsCards";
+
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -24,10 +27,11 @@ function Home() {
     <>
       <Navbar />
       <h1 className="text-center">products</h1>
+      <div className="products-container">
       {products?.map((product, index) => {
         const { name, price, image, description } = product;
         return (
-          <ProductCard
+          <ProductsCards
             key={index}
             name={name}
             description={description}
@@ -36,6 +40,7 @@ function Home() {
           />
         );
       })}
+      </div>
     </>
   );
 }
