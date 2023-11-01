@@ -17,7 +17,7 @@ function Navbar() {
           Aapna-Mart🛍️
         </Link>
 
-        <div>
+        <div className="navbar-links-container">
           <Link to="/login" className="navbar-link">
             Login
           </Link>
@@ -31,7 +31,7 @@ function Navbar() {
           </Link>
         </div>
 
-        <div>
+        <div className="navbar-user-container">
           Hello, {user.name || "user"}
           {user?.name ? (
             <span

@@ -63,7 +63,7 @@ function SignUp() {
     console.log(storageUser);
 
     if (storageUser?.email) {
-      alert("You are already logged in!");
+      showToast('You are already logged in!', 'alert', 4000);
       window.location.href = "/";
     }
   }, []);

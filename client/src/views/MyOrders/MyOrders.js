@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./MyOrders.css";
 import Navbar from "../../components/Navbar/Navbar";
+import showToast from 'crunchy-toast';
 
 function MyOrders() {
   const [user, setUser] = useState({});
@@ -11,7 +12,7 @@ function MyOrders() {
     if (storageUser?.email) {
       setUser(storageUser);
     } else {
-      alert("You are not logged in!");
+      showToast('You are not logged in!', 'alert', 5000);
       window.location.href = "/login";
     }
   }, []);
