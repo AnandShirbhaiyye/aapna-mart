@@ -1,8 +1,7 @@
 .buy-page-container{
     background-color: white;
-    padding: 15px;
     border-radius: 20px;
-    margin: 10px;
+    padding: 20px;
 }
 .btn-increase-quantity{
     background-color: white;
@@ -30,4 +29,21 @@
     font-size: 30px;
     margin: 10px;
     font-weight: bold;
+}
+.buy-product-image{
+    width: 300px;
+    border-radius: 15px;
+    background-color: #fff;
+    margin: 10px;
+}
+.input-shipping-address{
+    margin-top: 20px;
+    width: 50%;
+    height: 40px;
+    display: block;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
 }

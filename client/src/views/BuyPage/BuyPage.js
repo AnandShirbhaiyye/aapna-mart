@@ -54,29 +54,45 @@ function BuyPage() {
   return (
     <>
       <Navbar />
-      <div className="buy-page-container shadow-lg">
-        <h1>{products.name}</h1>
-        <h1> {products.description}</h1>
-        <h1> {products.price}</h1>
-        <input
-          type="text"
-          placeholder="enter shipping address"
-          className="input-shipping-address"
-          value={shippingAddress}
-          onChange={(e) => {
-            setShippingAddress(e.target.value);
-          }}
-        />
-        <div className="mt-3">
-          <span className="btn-descrease-quantity" onClick={descreaseQuantiity}>
-            ➖
-          </span>
-          <span className="product-quantity-text">{quantity}</span>
-          <span className="btn-increase-quantity" onClick={increaseQuantiity}>
-            ➕
-          </span>
+      <div className="container buy-page-container shadow-md">
+        <div className="row">
+          <div className="col-md-4">
+            <img
+              src={products.image}
+              alt={products.name}
+              className="buy-product-image shadow-lg"
+            />
+          </div>
+          <div className="col-md-8">
+            <h3>{products.name}</h3>
+            <p> {products.description}</p>
+            <p> {products.price} ₹</p>
+            <input
+              type="text"
+              placeholder="enter shipping address"
+              className="input-shipping-address"
+              value={shippingAddress}
+              onChange={(e) => {
+                setShippingAddress(e.target.value);
+              }}
+            />
+            <div className="mt-3">
+              <span
+                className="btn-descrease-quantity"
+                onClick={descreaseQuantiity}
+              >
+                ➖
+              </span>
+              <span className="product-quantity-text">{quantity}</span>
+              <span
+                className="btn-increase-quantity"
+                onClick={increaseQuantiity}
+              >
+                ➕
+              </span>
+            </div>
+          </div>
         </div>
-
         <button
           type="button"
           className="btn w-100 mt-3 btn-dark"
