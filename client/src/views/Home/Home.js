@@ -29,7 +29,7 @@ function Home() {
       <h1 className="text-center">products</h1>
       <div className="products-container">
       {products?.map((product, index) => {
-        const { name, price, image, description } = product;
+        const { _id, name, price, image, description } = product;
         return (
           <ProductsCards
             key={index}
@@ -37,6 +37,7 @@ function Home() {
             description={description}
             price={price}
             image={image}
+            id = {_id}
           />
         );
       })}

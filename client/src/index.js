@@ -11,6 +11,7 @@ import Login from './views/Login/Login';
 import SignUp  from './views/SignUp/SignUp';
 import Navbar from './components/Navbar/Navbar';
 import MyOrders from './views/MyOrders/MyOrders';
+import BuyPage from './views/BuyPage/BuyPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: '/orders',
     element: <MyOrders/>
+  },
+  {
+    path: '/buy/:id',
+    element: <BuyPage/>
   },
   {
     path: '/navbar',
