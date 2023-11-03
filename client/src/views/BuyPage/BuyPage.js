@@ -8,6 +8,7 @@ function BuyPage() {
   const { id } = useParams();
   const [products, setProducts] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [shippingAddress, setShippingAddress] = useState("");
 
   const loadProduct = async () => {
     if (!id) {
@@ -29,6 +30,23 @@ function BuyPage() {
     setQuantity(quantity - 1);
   };
 
+  const placeOrder = async () => {
+    const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+
+    const orderDetails = {
+      user: currentUser._id,
+      products: id,
+      quantity: quantity,
+      shippingAddress: shippingAddress,
+    };
+
+    const response = await axios.post("/order", orderDetails);
+    alert(response?.data?.message);
+    if (response?.data?.success) {
+      window.location.href = "/orders";
+    }
+  };
+
   useEffect(() => {
     loadProduct();
   }, []);
@@ -40,7 +58,16 @@ function BuyPage() {
         <h1>{products.name}</h1>
         <h1> {products.description}</h1>
         <h1> {products.price}</h1>
-        <div>
+        <input
+          type="text"
+          placeholder="enter shipping address"
+          className="input-shipping-address"
+          value={shippingAddress}
+          onChange={(e) => {
+            setShippingAddress(e.target.value);
+          }}
+        />
+        <div className="mt-3">
           <span className="btn-descrease-quantity" onClick={descreaseQuantiity}>
             ➖
           </span>
@@ -49,6 +76,14 @@ function BuyPage() {
             ➕
           </span>
         </div>
+
+        <button
+          type="button"
+          className="btn w-100 mt-3 btn-dark"
+          onClick={placeOrder}
+        >
+          Place Order
+        </button>
       </div>
     </>
   );
