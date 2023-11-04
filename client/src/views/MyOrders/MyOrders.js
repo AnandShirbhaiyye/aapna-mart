@@ -3,7 +3,12 @@ import "./MyOrders.css";
 import Navbar from "../../components/Navbar/Navbar";
 import showToast from 'crunchy-toast';
 import axios from "axios";
-import { Link } from "react-router-dom";
+
+const STATUS_BADGE_COLOR_MAP = {
+  "pending":"badge-danger",
+  "shifted": "badge-warning",
+  "delivered": "badge-success"
+}
 
 function MyOrders() {
  
@@ -21,8 +26,6 @@ function MyOrders() {
       window.location.href = "/login";
     }
   }, []);
-
- 
 
   const loadOrders = async ()=>{
     const storageUsers = JSON.parse(localStorage.getItem("user") || "{}");
@@ -51,11 +54,10 @@ function MyOrders() {
             const {product, quantity, status, deliveryCharges} = order;
             return(
               <>
-              <div className="order-card">
+              <div className="order-card shadow-md">
                 <h2>{product?.name}</h2>
-                <h2>{status}</h2>
-                <h2>{quantity}</h2>
-                <h2>{deliveryCharges}</h2>
+                <h3>{product?.price} x {quantity} = ₹ {product?.price * quantity}</h3>
+                <span className={`order-status ${STATUS_BADGE_COLOR_MAP[status]}`} >{status}</span>
               </div>
               </>
             )

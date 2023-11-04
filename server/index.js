@@ -258,8 +258,29 @@ app.get("/oreders", async (req, res) => {
 //update status
 app.patch("/order/status/:id", async (req, res) => {
   const { status } = req.body;
-
   const { id } = req.params;
+
+  const STATUS_PRIORITY_MAP = {
+    pending: 0,
+    shifted: 1,
+    delivered: 2,
+    returned: 3,
+    cancelled: 4,
+    rejected: 5
+  }
+
+  const order = await Order.findById(id);
+  const currentStatus = order.status;
+
+  const currentPriority = STATUS_PRIORITY_MAP[currentStatus];
+  const newPriority = STATUS_PRIORITY_MAP[status];
+
+  if(currentPriority > newPriority){
+    res.json({
+      success: false,
+      message: `${status} cannot be set once order is ${currentStatus}`
+    })
+  }
 
   await Order.updateOne({ _id: id }, { $set: { status: status } });
 
