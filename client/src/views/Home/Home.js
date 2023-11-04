@@ -26,7 +26,7 @@ function Home() {
   return (
     <>
       <Navbar />
-      <h1 className="text-center">products</h1>
+      <h3 className="text-center my-title">Products</h3>
       <div className="products-container">
       {products?.map((product, index) => {
         const { _id, name, price, image, description } = product;

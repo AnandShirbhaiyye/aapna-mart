@@ -9,6 +9,7 @@ function BuyPage() {
   const [products, setProducts] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [shippingAddress, setShippingAddress] = useState("");
+  const [deliveryCharges, setDeliveryCharges] = useState(50);
 
   const loadProduct = async () => {
     if (!id) {
@@ -38,6 +39,7 @@ function BuyPage() {
       products: id,
       quantity: quantity,
       shippingAddress: shippingAddress,
+      deliveryCharges: deliveryCharges,
     };
 
     const response = await axios.post("/order", orderDetails);
@@ -91,6 +93,41 @@ function BuyPage() {
                 ➕
               </span>
             </div>
+
+            <div className="d-flex mt-3 justify-content-between">
+              <div>
+                <input
+                  type="radio"
+                  id="40"
+                  name=""
+                  className=" me-1"
+                  checked={deliveryCharges === 50}
+                  onClick={() => {
+                    setDeliveryCharges(50);
+                  }}
+                />
+                <label htmlFor="50">
+                  {" "}
+                  Expected delivery in 3 days in 50 rs
+                </label>
+              </div>
+
+              <div>
+                <input
+                  type="radio"
+                  id="100"
+                  name=""
+                  className=" me-1"
+                  checked={deliveryCharges === 100}
+                  onClick={() => {
+                    setDeliveryCharges(100);
+                  }}
+                />
+                <label htmlFor="100">
+                  Expected delivery in 1 day in 100 rs{" "}
+                </label>
+              </div>
+            </div>
           </div>
         </div>
         <button
@@ -99,7 +136,7 @@ function BuyPage() {
           onClick={placeOrder}
         >
           Place Order
-        </button>   
+        </button>
       </div>
     </>
   );

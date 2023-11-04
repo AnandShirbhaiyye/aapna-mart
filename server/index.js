@@ -246,7 +246,7 @@ app.get("/order/user/:id", async (req, res) => {
 });
 
 // get all orders
-app.get("/oreders", async (req, res) => {
+app.get("/orders", async (req, res) => {
   const allOrders = await Order.find();
   res.json({
     success: "true",
