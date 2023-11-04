@@ -157,6 +157,7 @@ app.get("/search-products", async (req, res) => {
   });
 });
 
+
 // PUT / products
 app.put("/product/:id", async (req, res) => {
   const { id } = req.params;
@@ -191,7 +192,7 @@ app.post("/order", async (req, res) => {
 
   const order = new Order({
     user: user,
-    product: product,
+    product: product, 
     quantity: quantity,
     shippingAddress: shippingAddress,
     deliveryCharges: deliveryCharges,
@@ -220,7 +221,7 @@ app.get("/order/:id", async (req, res) => {
 
   const order = await Order.findOne({ _id: id }).populate("user product");
 
-  order.user.password = undefined;
+  
 
   res.json({
     success: "true",
@@ -232,14 +233,14 @@ app.get("/order/:id", async (req, res) => {
 // get all orders by user
 app.get("/order/user/:id", async (req, res) => {
   const { id } = req.params;
-  const orders = await Order.find({ user: id }).populate("user  product");
+  const order = await Order.find({ user: {_id:id} }).populate("user product");
 
-  orders.forEach((Order) => {
-    Order.user.password = undefined;
-  });
+  // orders.forEach((Order) => {
+  //   Order.user.password = undefined;
+  // });
   res.json({
     success: "true",
-    data: orders,
+    data: order,
     message: " Orders fetch successfully..!",
   });
 });

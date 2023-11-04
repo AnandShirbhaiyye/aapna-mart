@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import "./BuyPage.css";
 
@@ -93,6 +94,7 @@ function BuyPage() {
             </div>
           </div>
         </div>
+        <Link to="/orders">
         <button
           type="button"
           className="btn w-100 mt-3 btn-dark"
@@ -100,6 +102,7 @@ function BuyPage() {
         >
           Place Order
         </button>
+        </Link>     
       </div>
     </>
   );

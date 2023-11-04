@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./MyOrders.css";
 import Navbar from "../../components/Navbar/Navbar";
 import showToast from 'crunchy-toast';
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function MyOrders() {
+ 
   const [user, setUser] = useState({});
+  const [orders, setOrders] = useState([]);
+
 
   useEffect(() => {
     const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
@@ -17,10 +22,46 @@ function MyOrders() {
     }
   }, []);
 
+ 
+
+  const loadOrders = async ()=>{
+    const storageUsers = JSON.parse(localStorage.getItem("user") || "{}");
+    const userId = storageUsers._id;
+    if(!userId){
+    return;
+    }
+
+    const response = await axios.get(`/order/user/${userId}`);
+    setOrders(response?.data?.data)
+  }
+
+  useEffect(()=>{
+    loadOrders()
+  }, [user])
+
+ 
+
   return (
     <>
       <Navbar />
       <h1 className="text-center">My Orders</h1>
+      <div>
+        {
+          orders?.map((order, index)=>{
+            const {product, quantity, status, deliveryCharges} = order;
+            return(
+              <>
+              <div className="order-card">
+                <h2>{product?.name}</h2>
+                <h2>{status}</h2>
+                <h2>{quantity}</h2>
+                <h2>{deliveryCharges}</h2>
+              </div>
+              </>
+            )
+          })
+        }
+      </div>
     </>
   );
 }
